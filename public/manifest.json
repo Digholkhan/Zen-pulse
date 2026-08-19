@@ -1,0 +1,21 @@
+{
+  "name": "ZenPulse - Breathing, Meditation & Mindfulness",
+  "short_name": "ZenPulse",
+  "description": "Guided Wim Hof & box breathing exercises, meditation studio, stretch movement routines, and habit streak tracking.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12211f",
+  "theme_color": "#52887e",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

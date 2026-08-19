@@ -1,0 +1,120 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --background: 165 25% 97%;
+    --foreground: 165 40% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 165 40% 12%;
+
+    --primary: 155 90% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --muted: 165 15% 92%;
+    --muted-foreground: 165 15% 45%;
+
+    --accent: 155 80% 90%;
+    --accent-foreground: 155 90% 25%;
+
+    --border: 165 15% 88%;
+  }
+
+  .dark {
+    /* Ultra Deep Obsidian Dark Background */
+    --background: 160 35% 4%;
+    --foreground: 150 20% 96%;
+
+    --card: 160 25% 7%;
+    --card-foreground: 150 20% 96%;
+
+    /* Soft Neon Green Primary */
+    --primary: 152 100% 50%;
+    --primary-foreground: 160 40% 4%;
+
+    --muted: 160 20% 11%;
+    --muted-foreground: 150 15% 65%;
+
+    --accent: 160 30% 12%;
+    --accent-foreground: 152 100% 50%;
+
+    --border: 160 25% 12%;
+  }
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass-card {
+  background: rgba(10, 18, 15, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(16, 239, 156, 0.12);
+}
+
+/* Soft Neon Green Ambient Glow Background */
+.bg-ambient-radial {
+  background: radial-gradient(circle at 50% 20%, rgba(16, 239, 156, 0.08) 0%, rgba(7, 10, 9, 0) 70%);
+}
+
+.dark .bg-ambient-radial {
+  background: radial-gradient(circle at 40% 25%, rgba(16, 239, 156, 0.12) 0%, rgba(5, 8, 7, 1) 75%);
+}
+
+/* Breathing Visualizer Soft Neon Glow */
+.breathing-ring {
+  box-shadow: 0 0 60px rgba(16, 239, 156, 0.35), inset 0 0 40px rgba(16, 239, 156, 0.25);
+}
+
+.dark .breathing-ring {
+  box-shadow: 0 0 80px rgba(16, 239, 156, 0.55), inset 0 0 50px rgba(16, 239, 156, 0.35);
+}
+
+/* Neon Text Glow Helper */
+.text-neon-glow {
+  text-shadow: 0 0 15px rgba(16, 239, 156, 0.6);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 239, 156, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 239, 156, 0.4);
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

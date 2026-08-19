@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/breathing/page": "app/breathing/page.js",
+  "/breathing/custom/page": "app/breathing/custom/page.js",
+  "/meditation/page": "app/meditation/page.js",
+  "/yoga/page": "app/yoga/page.js",
+  "/favorites/page": "app/favorites/page.js",
+  "/routines/page": "app/routines/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/breathing/[slug]/page": "app/breathing/[slug]/page.js"
+}
