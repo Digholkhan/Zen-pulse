@@ -1,7 +1,7 @@
 /**
  * ZenPulse Web Audio API Synthesizer & Voice Guidance Engine
  * Uses pure Web Audio API synthesis for background soundscapes, bells, and cue tones,
- * with a heavy, soft, deep masculine Wim Hof-inspired voice cadence.
+ * with browser-generated voice guidance for breathing protocols.
  */
 
 class AudioEngine {
@@ -84,9 +84,7 @@ class AudioEngine {
     this.voiceGuidanceEnabled = enabled;
   }
 
-  /**
-   * Heavy Deep Wim Hof-style Voice Guidance using Web Speech API + Sub-bass resonance
-   */
+  /** Browser-generated voice guidance with a calm, low cadence. */
   public speak(text: string) {
     if (!this.voiceGuidanceEnabled || this.isMuted) return;
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -95,14 +93,13 @@ class AudioEngine {
       window.speechSynthesis.cancel(); // Cancel any queued speech
 
       const utterance = new SpeechSynthesisUtterance(text);
-      // Heavy deep masculine voice parameters (Wim Hof baritone)
-      utterance.pitch = 0.5;  // Extra deep heavy baritone
-      utterance.rate = 0.82;  // Slow, calm, grounded cadence
+      utterance.pitch = 0.7;
+      utterance.rate = 0.82;
       utterance.volume = this.voiceVol;
 
       const voices = window.speechSynthesis.getVoices();
       
-      // Select deep male English voice if available
+      // Select a low English voice when the browser exposes one.
       const deepMaleVoice = voices.find(v => {
         const name = v.name.toLowerCase();
         return (

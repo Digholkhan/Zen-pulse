@@ -134,7 +134,7 @@ export const SoundMixerModal: React.FC<SoundMixerModalProps> = ({ isOpen, onClos
           {/* Voice Volume */}
           <div>
             <div className="flex justify-between text-xs font-semibold text-zen-600 dark:text-zen-300 mb-1.5">
-              <span>Deep Male Voice Volume</span>
+              <span>Guidance Voice Volume</span>
               <span className="text-neon-400">{Math.round(voiceVol * 100)}%</span>
             </div>
             <input

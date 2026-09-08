@@ -67,13 +67,9 @@ body {
   border: 1px solid rgba(16, 239, 156, 0.12);
 }
 
-/* Soft Neon Green Ambient Glow Background */
+/* Kept for compatibility with existing non-session surfaces. */
 .bg-ambient-radial {
-  background: radial-gradient(circle at 50% 20%, rgba(16, 239, 156, 0.08) 0%, rgba(7, 10, 9, 0) 70%);
-}
-
-.dark .bg-ambient-radial {
-  background: radial-gradient(circle at 40% 25%, rgba(16, 239, 156, 0.12) 0%, rgba(5, 8, 7, 1) 75%);
+  background: hsl(var(--background));
 }
 
 /* Breathing Visualizer Soft Neon Glow */

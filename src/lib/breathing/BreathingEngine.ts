@@ -56,8 +56,7 @@ export class BreathingEngine {
     this.wimHofBreathCount = 0;
     this.status = 'idle';
 
-    const singleRoundSec = exercise.phases.reduce((acc, p) => acc + p.duration, 0);
-    this.totalDurationSec = singleRoundSec * this.totalRounds + 3;
+    this.totalDurationSec = this.getTotalDurationSec();
 
     this.notify();
   }
@@ -165,7 +164,7 @@ export class BreathingEngine {
     const totalDeltaMs = now - this.sessionStartTime - this.pauseAccumulatedMs;
     this.totalElapsedSec = Math.max(0, totalDeltaMs / 1000);
 
-    // Dynamic Wim Hof Retention vocal callouts during middle of phase
+    // Provide a couple of original reminders during the long retention phase.
     if (this.exercise?.category === 'wim_hof') {
       const currentPhase = this.exercise.phases[this.currentPhaseIndex];
       if (currentPhase?.type === 'hold_out') {
@@ -202,7 +201,7 @@ export class BreathingEngine {
 
     this.currentPhaseIndex = index;
     const phase = this.exercise.phases[index];
-    this.phaseDurationSec = phase.duration;
+    this.phaseDurationSec = this.getPhaseDuration(phase, this.currentRound);
     this.phaseStartTime = performance.now();
     this.phaseElapsedSec = 0;
 
@@ -214,7 +213,7 @@ export class BreathingEngine {
     // Trigger Audio Cues
     audioEngine.playPhaseCue(phase.type);
 
-    // Wim Hof exact vocal guidance phrases
+    // Use original browser-generated guidance for this protocol.
     if (this.exercise.category === 'wim_hof') {
       if (phase.type === 'inhale') {
         if (this.wimHofBreathCount === 1) {
@@ -252,6 +251,24 @@ export class BreathingEngine {
     }
 
     this.notify();
+  }
+
+  private getPhaseDuration(phase: BreathingPhase, round: number) {
+    if (this.exercise?.category === 'wim_hof' && phase.type === 'hold_out') {
+      return [60, 90, 120][Math.min(round - 1, 2)] ?? phase.duration;
+    }
+    return phase.duration;
+  }
+
+  private getTotalDurationSec() {
+    if (!this.exercise) return 0;
+
+    return Array.from({ length: this.totalRounds }, (_, index) =>
+      this.exercise!.phases.reduce(
+        (total, phase) => total + this.getPhaseDuration(phase, index + 1),
+        0
+      )
+    ).reduce((total, roundDuration) => total + roundDuration, 3);
   }
 
   private advancePhase() {

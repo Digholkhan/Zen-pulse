@@ -4,7 +4,6 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { MobileNav } from '@/components/layout/MobileNav';
 import { Footer } from '@/components/layout/Footer';
-import { WaterfallBackground } from '@/components/ui/WaterfallBackground';
 
 export const viewport: Viewport = {
   themeColor: '#10ef9c',
@@ -13,7 +12,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'ZenPulse - Deep Wim Hof & Guided Breathing Engine',
   description:
-    'Commercial-grade guided Wim Hof & box breathing exercises, meditation studio, stretch movement routines, and habit streak tracking with deep masculine voice guidance.',
+    'Guided Wim Hof and box breathing exercises, meditation studio, movement routines, and habit streak tracking with browser-generated voice guidance.',
   keywords: [
     'Breathing exercises',
     'Wim Hof breathing',
@@ -42,10 +41,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-ambient-radial antialiased text-zen-900 dark:text-zen-100 selection:bg-neon-500 selection:text-zen-950 relative">
-        {/* Soothing Cascading Waterfall Animated Background */}
-        <WaterfallBackground />
-
+      <body className="min-h-screen flex flex-col bg-zen-950 antialiased text-zen-900 dark:text-zen-100 selection:bg-neon-500 selection:text-zen-950 relative">
         <Navbar />
         <div className="flex-1 flex w-full relative z-10">
           {/* Sidebar pinned directly to the absolute left edge of the screen */}

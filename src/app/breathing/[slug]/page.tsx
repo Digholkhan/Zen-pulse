@@ -81,7 +81,7 @@ export default function ActiveBreathingPage() {
     <div
       ref={containerRef}
       className={`relative min-h-[calc(100vh-6rem)] flex flex-col justify-between items-center transition-colors ${
-        isFullscreen ? 'fixed inset-0 z-50 bg-zen-950 p-6 overflow-hidden' : ''
+        isFullscreen ? 'fixed inset-0 z-50 bg-zen-950 p-6 overflow-hidden' : 'bg-zen-950'
       }`}
     >
       {/* Top Header Bar */}

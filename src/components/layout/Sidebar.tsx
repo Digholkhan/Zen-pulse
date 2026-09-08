@@ -76,7 +76,7 @@ export const Sidebar: React.FC = () => {
       <div className="mt-auto p-4 rounded-3xl bg-gradient-to-br from-neon-500/15 via-zen-900/80 to-zen-950 border border-neon-500/25 text-center shadow-lg">
         <Wind className="w-6 h-6 text-neon-400 mx-auto mb-2 animate-bounce" />
         <h4 className="text-xs font-bold text-zen-900 dark:text-zen-100">Wim Hof Guided Session</h4>
-        <p className="text-[10px] text-zen-600 dark:text-zen-400 mt-1 mb-3">Heavy deep male voice guided breath retention.</p>
+        <p className="text-[10px] text-zen-600 dark:text-zen-400 mt-1 mb-3">Browser voice cues guide each breath and retention.</p>
         <Link
           href="/breathing/wim-hof-session"
           className="inline-block w-full py-2 px-3 rounded-full text-xs font-bold bg-neon-500 text-zen-950 hover:bg-neon-400 transition-colors shadow-neon"

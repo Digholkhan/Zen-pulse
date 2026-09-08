@@ -17,7 +17,7 @@ export const HeroBanner: React.FC = () => {
       <div className="relative z-10 max-w-xl space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neon-500/15 text-neon-400 text-xs font-extrabold shadow-sm">
           <Sparkles className="w-3.5 h-3.5 text-neon-400" />
-          <span>Wim Hof-Inspired Heavy Voice & Retention Engine</span>
+          <span>Wim Hof Method Breathing & Retention</span>
         </div>
 
         <h1 className="font-display font-black text-3xl sm:text-5xl tracking-tight text-zen-900 dark:text-zen-100 leading-tight">
@@ -28,7 +28,7 @@ export const HeroBanner: React.FC = () => {
         </h1>
 
         <p className="text-sm sm:text-base text-zen-600 dark:text-zen-300 leading-relaxed font-medium">
-          Guided Wim Hof power breathing, deep masculine voice guidance, meditation studio, movement routines, and mindful habits to help you reset instantly.
+          Guided Wim Hof breathing, browser-generated voice cues, meditation studio, movement routines, and mindful habits to help you reset instantly.
         </p>
 
         {/* Action CTAs */}

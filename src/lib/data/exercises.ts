@@ -1,10 +1,27 @@
 import { BreathingExercise } from '@/types';
 
+const wimHofBreathPhases = Array.from({ length: 30 }, (_, index) => [
+  {
+    id: `wh_in_${index + 1}`,
+    type: 'inhale' as const,
+    duration: 1.8,
+    label: index === 29 ? 'Final Deep Inhale' : 'Deep Inhale',
+    description: 'Breathe into the belly, chest, and head',
+  },
+  {
+    id: `wh_out_${index + 1}`,
+    type: 'exhale' as const,
+    duration: 1.2,
+    label: 'Release',
+    description: 'Let the breath go without forcing the exhale',
+  },
+]).flat();
+
 export const PRESET_EXERCISES: BreathingExercise[] = [
   {
     id: 'wim-hof-session',
     slug: 'wim-hof-session',
-    title: 'Official Wim Hof Method Guided Breathwork',
+    title: 'Wim Hof Method Guided Breathwork',
     category: 'wim_hof',
     difficulty: 'Advanced',
     durationMins: 11,
@@ -12,7 +29,7 @@ export const PRESET_EXERCISES: BreathingExercise[] = [
     safetyNotice:
       'Practice in a safe, comfortable sitting or lying position. Never practice while driving, swimming, bathing, or in water where loss of consciousness could cause injury. Listen to your body and stop if you feel uncomfortable.',
     description:
-      'Official 3-round Wim Hof guided experience: 30 rhythmic deep power breaths followed by progressive breath retention holds (1m, 1.5m, 2m) and 15s recovery holds.',
+      'Three-round Wim Hof breathing sequence with 30 deep breaths, relaxed retention, a full recovery inhale, and a 15-second recovery hold.',
     benefits: [
       'Alkalizes blood pH & lowers inflammation',
       'Supercharges cellular oxygen saturation',
@@ -22,25 +39,11 @@ export const PRESET_EXERCISES: BreathingExercise[] = [
     defaultRounds: 3,
     recommendedSound: 'binaural',
     phases: [
-      // Round 1: 30 Rhythmic Deep Breaths (1.8s In, 1.2s Out)
-      { id: 'wh_in_1', type: 'inhale', duration: 1.8, label: 'Fully In', description: 'Breathe into belly, chest, and head' },
-      { id: 'wh_out_1', type: 'exhale', duration: 1.2, label: 'Let Go', description: 'Just let go, do not force out' },
-      { id: 'wh_in_2', type: 'inhale', duration: 1.8, label: 'Deeply In' },
-      { id: 'wh_out_2', type: 'exhale', duration: 1.2, label: 'Let Go' },
-      { id: 'wh_in_3', type: 'inhale', duration: 1.8, label: 'Fully In' },
-      { id: 'wh_out_3', type: 'exhale', duration: 1.2, label: 'Let Go' },
-      { id: 'wh_in_4', type: 'inhale', duration: 1.8, label: 'Breathe In' },
-      { id: 'wh_out_4', type: 'exhale', duration: 1.2, label: 'Let Go' },
-      { id: 'wh_in_5', type: 'inhale', duration: 1.8, label: 'Fully In' },
-      { id: 'wh_out_5', type: 'exhale', duration: 1.2, label: 'Let Go' },
-      
-      // Retention Hold (Empty lungs after 30 breaths)
-      { id: 'wh_hold_out_1', type: 'hold_out', duration: 60, label: 'Retention Hold (Empty Lungs)', description: 'Relax... feel your heart beating... stay in the moment' },
-      
-      // Recovery Inhale & Hold
-      { id: 'wh_rec_in_1', type: 'recovery_inhale', duration: 3.5, label: 'Deep Inhale', description: 'Take a deep breath in to capacity' },
-      { id: 'wh_rec_hold_1', type: 'recovery_hold', duration: 15, label: 'Squeeze & Hold (15s)', description: 'Squeeze to your head... 3, 2, 1' },
-      { id: 'wh_rest_1', type: 'rest', duration: 3, label: 'Release & Let Go' },
+      ...wimHofBreathPhases,
+      { id: 'wh_hold_out', type: 'hold_out', duration: 60, label: 'Relaxed Retention', description: 'Rest with empty lungs and remain relaxed' },
+      { id: 'wh_rec_in', type: 'recovery_inhale', duration: 3.5, label: 'Recovery Inhale', description: 'Take one full breath in' },
+      { id: 'wh_rec_hold', type: 'recovery_hold', duration: 15, label: 'Recovery Hold', description: 'Hold gently for 15 seconds' },
+      { id: 'wh_rest', type: 'rest', duration: 3, label: 'Release and Rest' },
     ],
   },
   {
