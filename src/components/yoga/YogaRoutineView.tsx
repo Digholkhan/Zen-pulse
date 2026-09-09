@@ -6,6 +6,7 @@ import { Play, Pause, SkipForward, CheckCircle2, Activity, Clock, Lightbulb } fr
 import { formatTime } from '@/lib/utils';
 import { audioEngine } from '@/lib/audio/AudioEngine';
 import { useUserStore } from '@/lib/store/useUserStore';
+import { YogaPoseVisualizer } from './YogaPoseVisualizer';
 
 interface YogaRoutineViewProps {
   routine: YogaRoutine;
@@ -20,8 +21,10 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
   const [poseTimerSec, setPoseTimerSec] = useState(routine.poses[0]?.durationSec || 60);
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [previewPoseIdx, setPreviewPoseIdx] = useState(0);
 
   const currentPose = routine.poses[currentPoseIdx];
+  const displayedPose = routine.poses[previewPoseIdx] || currentPose;
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -37,6 +40,7 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
         const nextIdx = currentPoseIdx + 1;
         if (nextIdx < routine.poses.length) {
           setCurrentPoseIdx(nextIdx);
+          setPreviewPoseIdx(nextIdx);
           setPoseTimerSec(routine.poses[nextIdx].durationSec);
           audioEngine.playBell(523.25, 2.0);
           audioEngine.speak(routine.poses[nextIdx].name);
@@ -82,6 +86,7 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
     if (currentPoseIdx < routine.poses.length - 1) {
       const nextIdx = currentPoseIdx + 1;
       setCurrentPoseIdx(nextIdx);
+      setPreviewPoseIdx(nextIdx);
       setIsResting(false);
       setPoseTimerSec(routine.poses[nextIdx].durationSec);
     }
@@ -131,8 +136,17 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
           {isResting ? 'Rest & Transition' : currentPose.name}
         </div>
 
-        <div className="font-display font-extrabold text-5xl sm:text-6xl text-zen-900 dark:text-zen-100 py-2">
-          {formatTime(poseTimerSec)}
+        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_190px] lg:items-center text-left">
+          <YogaPoseVisualizer pose={displayedPose} isResting={isResting} />
+          <div className="text-center lg:text-right">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-zen-500">Time remaining</span>
+            <div className="font-display font-extrabold text-5xl sm:text-6xl text-zen-900 dark:text-zen-100 py-2">
+              {formatTime(poseTimerSec)}
+            </div>
+            {previewPoseIdx !== currentPoseIdx && !isResting && (
+              <p className="text-[11px] text-zen-500">Previewing another position</p>
+            )}
+          </div>
         </div>
 
         <p className="text-xs sm:text-sm font-medium text-zen-700 dark:text-zen-300 leading-relaxed max-w-md mx-auto">
@@ -145,6 +159,26 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
             <span className="text-zen-600 dark:text-zen-400">{currentPose.tips}</span>
           </div>
         )}
+      </div>
+
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-zen-500">All positions</span>
+          <span className="text-[10px] text-zen-500">Select a pose to view it</span>
+        </div>
+        <div className="flex gap-2 overflow-x-auto pb-2">
+          {routine.poses.map((pose, idx) => (
+            <div key={pose.id} className="shrink-0 w-[112px]">
+              <YogaPoseVisualizer
+                pose={pose}
+                compact
+                isActive={idx === previewPoseIdx}
+                onClick={() => setPreviewPoseIdx(idx)}
+              />
+              <p className="mt-1 truncate text-center text-[10px] font-semibold text-zen-600 dark:text-zen-400">{idx + 1}. {pose.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Controls */}
