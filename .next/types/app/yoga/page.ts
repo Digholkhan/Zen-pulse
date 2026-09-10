@@ -1,4 +1,4 @@
-// File: C:\Users\Mohiuddin\Desktop\New folder (2)\src\app\yoga\page.tsx
+// File: D:\Mohiuddin\Zen-pulse\src\app\yoga\page.tsx
 import * as entry from '../../../../src/app/yoga/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

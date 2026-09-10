@@ -133,7 +133,7 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
       {/* Main Pose Card */}
       <div className="p-6 rounded-3xl bg-gradient-to-br from-zen-500/10 via-teal-500/5 to-emerald-500/10 border border-zen-500/20 text-center space-y-4">
         <div className="inline-flex px-3 py-1 rounded-full bg-zen-500 text-white dark:bg-zen-400 dark:text-zen-950 text-xs font-bold uppercase tracking-wider">
-          {isResting ? 'Rest & Transition' : currentPose.name}
+          {isResting ? 'Rest & Transition' : displayedPose.name}
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_190px] lg:items-center text-left">
@@ -150,13 +150,13 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
         </div>
 
         <p className="text-xs sm:text-sm font-medium text-zen-700 dark:text-zen-300 leading-relaxed max-w-md mx-auto">
-          {isResting ? 'Take a deep breath and prepare for the next movement pose.' : currentPose.instructions}
+          {isResting ? 'Take a deep breath and prepare for the next movement pose.' : displayedPose.instructions}
         </p>
 
         {!isResting && (
           <div className="p-3 rounded-2xl bg-white/60 dark:bg-zen-900/60 border border-zen-200/60 dark:border-zen-800/60 text-left flex items-start gap-2 text-xs">
             <Lightbulb className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-            <span className="text-zen-600 dark:text-zen-400">{currentPose.tips}</span>
+            <span className="text-zen-600 dark:text-zen-400">{displayedPose.tips}</span>
           </div>
         )}
       </div>
@@ -184,7 +184,7 @@ export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFin
       {/* Controls */}
       <div className="flex items-center justify-between pt-2">
         <div className="text-xs font-medium text-zen-500">
-          Target: <span className="text-zen-800 dark:text-zen-200 font-semibold">{currentPose.targetArea}</span>
+          Target: <span className="text-zen-800 dark:text-zen-200 font-semibold">{displayedPose.targetArea}</span>
         </div>
 
         <div className="flex items-center gap-3">
