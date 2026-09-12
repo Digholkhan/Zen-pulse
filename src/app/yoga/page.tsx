@@ -2,15 +2,18 @@
 
 import React, { useState } from 'react';
 import { PRESET_YOGA_ROUTINES } from '@/lib/data/yogaRoutines';
-import { YogaRoutineView } from '@/components/yoga/YogaRoutineView';
+import { YogaPosePreview, YogaRoutineView } from '@/components/yoga/YogaRoutineView';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { Activity, Clock, Play, Sparkles } from 'lucide-react';
-import { YogaRoutine } from '@/types';
+import { YogaPose, YogaRoutine } from '@/types';
 
 export default function YogaPage() {
   const [selectedRoutine, setSelectedRoutine] = useState<YogaRoutine | null>(null);
+  const postureLibrary = Array.from(
+    new Map(PRESET_YOGA_ROUTINES.flatMap((routine) => routine.poses).map((pose) => [pose.illustrationKey, pose])).values()
+  );
 
   return (
     <div className="space-y-8">
@@ -82,6 +85,36 @@ export default function YogaPage() {
             </Card>
           ))}
         </div>
+      )}
+
+      {!selectedRoutine && (
+        <section className="space-y-4" aria-labelledby="posture-library-heading">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-300">
+                Live posture library
+              </span>
+              <h2 id="posture-library-heading" className="text-2xl font-display font-bold text-zen-900 dark:text-zen-100">
+                Choose a movement to explore
+              </h2>
+              <p className="text-xs text-zen-600 dark:text-zen-400 mt-1">
+                Every card shows the posture in motion so you can preview the shape before starting a routine.
+              </p>
+            </div>
+            <span className="hidden sm:inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zen-500">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+              {postureLibrary.length} postures
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+            {postureLibrary.map((pose: YogaPose) => (
+              <article key={pose.id} className="rounded-3xl border border-zen-200/70 dark:border-zen-800/70 bg-white/70 dark:bg-zen-950/45 p-3 shadow-sm transition-all hover:-translate-y-1 hover:border-emerald-400/70 hover:shadow-lg">
+                <YogaPosePreview pose={pose} />
+              </article>
+            ))}
+          </div>
+        </section>
       )}
     </div>
   );

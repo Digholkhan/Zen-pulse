@@ -41,7 +41,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-zen-950 antialiased text-zen-900 dark:text-zen-100 selection:bg-neon-500 selection:text-zen-950 relative">
+      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-neon-500 selection:text-zen-950 relative">
         <Navbar />
         <div className="flex-1 flex w-full relative z-10">
           {/* Sidebar pinned directly to the absolute left edge of the screen */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { YogaRoutine } from '@/types';
+import { YogaPose, YogaRoutine } from '@/types';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { Play, Pause, SkipForward, CheckCircle2, Activity, Clock, Lightbulb } from 'lucide-react';
@@ -12,6 +12,19 @@ interface YogaRoutineViewProps {
   routine: YogaRoutine;
   onFinish?: () => void;
 }
+
+export const YogaPosePreview: React.FC<{ pose: YogaPose }> = ({ pose }) => (
+  <div className="space-y-3">
+    <YogaPoseVisualizer pose={pose} />
+    <div className="px-2 pb-1">
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-display font-bold text-base text-zen-900 dark:text-zen-100">{pose.name}</h3>
+        <span className="shrink-0 text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">{pose.durationSec}s</span>
+      </div>
+      <p className="mt-1 text-[11px] leading-relaxed text-zen-600 dark:text-zen-400">{pose.targetArea}</p>
+    </div>
+  </div>
+);
 
 export const YogaRoutineView: React.FC<YogaRoutineViewProps> = ({ routine, onFinish }) => {
   const { recordCompletedSession } = useUserStore();
